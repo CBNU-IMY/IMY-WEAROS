@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+
+
     <color name="md_theme_light_primary">#006A5F</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#74F7E5</color>
@@ -58,4 +60,6 @@
     <color name="md_theme_dark_primaryInverse">#006A5F</color>
     <color name="seed">#009688</color>
     <color name="error">#BA1B1B</color>
+
+
 </resources>

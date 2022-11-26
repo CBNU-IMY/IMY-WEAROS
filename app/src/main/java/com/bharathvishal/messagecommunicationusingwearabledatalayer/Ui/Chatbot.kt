@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+/*
 import com.codepalace.chatbot.Api.RetrofitBuilder
 import com.codepalace.chatbot.Api.RetrofitBuilder2
 import com.codepalace.chatbot.Data.User
 import com.codepalace.chatbot.Dto.CorpusDto
 import com.codepalace.chatbot.Dto.CorpusDto2
 import com.codepalace.chatbot.databinding.ActivityRegisterBinding
-import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.activity_register.*  */
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
