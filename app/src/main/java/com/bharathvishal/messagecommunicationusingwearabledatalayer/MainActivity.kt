@@ -3,12 +3,14 @@ package com.bharathvishal.messagecommunicationusingwearabledatalayer
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Ui.Chatbot
 import com.bharathvishal.messagecommunicationusingwearabledatalayer.databinding.ActivityMainBinding
 import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.*
@@ -82,6 +84,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                             sbTemp.append("\n")
                             sbTemp.append(binding.messagecontentEditText.text.toString())
                             sbTemp.append(" (Sent to Wearable)")
+
                             Log.d("receive1", " $sbTemp")
                             binding.messagelogTextView.append(sbTemp)
 
@@ -304,19 +307,31 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                     binding.sendmessageButton.visibility = View.VISIBLE
 
                     val sbTemp = StringBuilder()
+
                     sbTemp.append("\n")
                     sbTemp.append(s)
                     sbTemp.append(" - (Received from wearable)")
                     Log.d("receive1", " $sbTemp")
+
+
                     binding.messagelogTextView.append(sbTemp)
 
                     binding.scrollviewText.requestFocus()
                     binding.scrollviewText.post {
                         binding.scrollviewText.scrollTo(0, binding.scrollviewText.bottom)
                     }
+
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+
+
+
+                if(s=="hello"){
+                    startActivity(Intent(this, Chatbot::class.java))
+                }
+
+
             }
         } catch (e: Exception) {
             e.printStackTrace()

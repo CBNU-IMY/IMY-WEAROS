@@ -32,8 +32,13 @@
             android:exported="true">
         </activity>
 
+        <activity
+            android:name=".Ui.Register"
+            android:exported="true">
+        </activity>
 
-        <activity android:name=".Ui.Register"
+
+        <activity android:name=".MainActivity"
             android:resizeableActivity="true"
             android:exported="true"
             tools:targetApi="n">
