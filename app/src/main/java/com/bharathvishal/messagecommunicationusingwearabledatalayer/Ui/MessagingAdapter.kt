@@ -5,6 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Data.Message
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.R
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Utils.Constants.RECEIVE_ID
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Utils.Constants.SEND_ID
+import kotlinx.android.synthetic.main.message_item.view.*
+
 /*
 import com.codepalace.chatbot.R
 import com.codepalace.chatbot.Data.Message

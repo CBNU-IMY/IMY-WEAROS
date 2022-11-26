@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Api.RetrofitBuilder
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Api.RetrofitBuilder2
 import com.bharathvishal.messagecommunicationusingwearabledatalayer.Data.User
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.databinding.ActivityRegisterBinding
+import kotlinx.android.synthetic.main.activity_register.*
 /*import com.codepalace.chatbot.Api.RetrofitBuilder
 import com.codepalace.chatbot.Api.RetrofitBuilder2
 import com.codepalace.chatbot.Data.User
@@ -191,49 +195,6 @@ class Register : AppCompatActivity() {
 
 
 
-
-
-    fun Corpuslist(){
-        val textviewresult= binding.textViewResult
-        val call = RetrofitBuilder.corpusapi.getAllByMaincategoryResponse("상처")
-        call.enqueue(object : Callback<List<CorpusDto>> { // 비동기 방식 통신 메소드
-            override fun onResponse( // 통신에 성공한 경우
-                call: Call<List<CorpusDto>>,
-                response: Response<List<CorpusDto>>
-            ) {
-                if(response.isSuccessful()){ // 응답 잘 받은 경우
-                    println("response.body()!!.size = ${response.body()!!.size}")
-
-                    val total=java.lang.StringBuilder();
-                    for(i in 0 until response.body()!!.size){
-                        val sb=java.lang.StringBuilder();
-                        sb.append(response.body()?.get(i)?.corpus_id)
-                        sb.append(response.body()?.get(i)?.status_keyword)
-                        sb.append(response.body()?.get(i)?.emotion_maincategory)
-                        sb.append(response.body()?.get(i)?.emotion_subcategory)
-                        sb.append(response.body()?.get(i)?.system_response1)
-                        sb.append(response.body()?.get(i)?.human_sentence2)
-
-                        total.append(sb)
-                        if(i==4){
-                            textviewresult.setText(total)
-                        }
-                    }
-
-                    val result=response.body()?.get(0)?.system_response1
-                    // println("result = ${result}")
-                }else{
-                    // 통신 성공 but 응답 실패
-                    Log.d("RESPONSE", "FAILURE")
-                }
-            }
-
-            override fun onFailure(call: Call<List<CorpusDto>>, t: Throwable) {
-                // 통신에 실패한 경우
-                Log.d("CONNECTION FAILURE: ", t.localizedMessage)
-            }
-        })
-    }
 
     fun Chatbotlist() {
         // val call = RetrofitBuilder.userapi.postSignupResponse(user)

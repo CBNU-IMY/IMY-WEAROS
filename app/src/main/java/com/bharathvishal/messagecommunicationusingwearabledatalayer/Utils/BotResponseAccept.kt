@@ -1,6 +1,7 @@
 package com.bharathvishal.messagecommunicationusingwearabledatalayer.Utils
 
 import android.util.Log
+import com.bharathvishal.messagecommunicationusingwearabledatalayer.Dto.CorpusDto
 /*
 import com.codepalace.chatbot.Api.RetrofitBuilder
 import com.codepalace.chatbot.Dto.CorpusDto
