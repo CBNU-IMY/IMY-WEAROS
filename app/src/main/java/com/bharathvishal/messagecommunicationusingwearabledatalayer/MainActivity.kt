@@ -328,7 +328,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
 
 
                 if(s=="hello"){
-                    startActivity(Intent(this, Chatbot::class.java))
+                    startActivity(Intent(this,Chatbot::class.java).putExtra("stage", "refuse"))
                 }
 
 
