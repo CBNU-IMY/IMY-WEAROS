@@ -256,7 +256,6 @@ class Chatbot : AppCompatActivity() {
                 if(stage.equals("refuse")) {
                     // response = BotResponseRefuse.basicResponses(message, corpuslist)
                     Chatbotlist(message)
-                    println("chatresponse = ${chatresponse}")
                     response=chatresponse
                 }
                 else if(stage.equals("bargain")){
@@ -360,64 +359,20 @@ class Chatbot : AppCompatActivity() {
     }
 
 
+    private suspend fun Chatbotlist(s: String) {
+        withContext(Dispatchers.IO) {
 
-    fun Chatbotlist(s : String) {
-        // val call = RetrofitBuilder.userapi.postSignupResponse(user)
-        //val call=RetrofitBuilder.chatbotapi.getKogpt2Response(s="나우울해")
-        val call=RetrofitBuilder.chatbotapi.getKogpt2Response(s)
-
-/*
-        Thread{
-            call.enqueue(object : Callback<ChatbotDto> { // 비동기 방식 통신 메소드
-                override fun onResponse( // 통신에 성공한 경우
-                    call: Call<ChatbotDto>,
-                    response: Response<ChatbotDto>
-                ) {
-                    if(response.isSuccessful()){ // 응답 잘 받은 경우
-                        chatresponse= response.body()!!.answer
-                        println("함수chatresponse = ${chatresponse}")
-                    }else{
-                        // 통신 성공 but 응답 실패
-                        Log.d("RESPONSE", "FAILURE")
-                    }
-
-                }
-
-                override fun onFailure(call: Call<ChatbotDto>, t: Throwable) {
-                    // 통신에 실패한 경우
-                    Log.d("CONNECTION FAILURE: ", t.localizedMessage)
-                }
-            })
-        }.start()
-
-        try{
-            Thread.sleep(50)
-        } catch(e: Exception){
-            e.printStackTrace()
-        }*/
-
-        call.enqueue(object : Callback<ChatbotDto> { // 비동기 방식 통신 메소드
-            override fun onResponse( // 통신에 성공한 경우
-                call: Call<ChatbotDto>,
-                response: Response<ChatbotDto>
-            ) {
-                if(response.isSuccessful()){ // 응답 잘 받은 경우
-                    chatresponse= response.body()!!.answer
-                    println("함수 chatresponse = ${chatresponse}")
-                }else{
-                    // 통신 성공 but 응답 실패
-                    Log.d("RESPONSE_NO", "FAILURE")
-                }
-            }
-
-            override fun onFailure(call: Call<ChatbotDto>, t: Throwable) {
-                // 통신에 실패한 경우
-                Log.d("CONNECTION FAILURE: ", t.localizedMessage)
-            }
-        })
-
+            runCatching {
+                val retrofit = RetrofitBuilder.chatbotapi.getKogpt2Response(s)
+                val res = retrofit.execute().body()
+                //res.code() == 200
+                println("res = ${res}")
+                chatresponse= res!!.answer
+            }.getOrDefault(false)
+        }
 
     }
+
 
 
 }

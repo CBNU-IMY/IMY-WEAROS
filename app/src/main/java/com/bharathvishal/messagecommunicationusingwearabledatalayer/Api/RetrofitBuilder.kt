@@ -13,7 +13,7 @@ object RetrofitBuilder {
     val localhost="http://10.0.2.2:5000"
     init{
         val retrofit= Retrofit.Builder()
-            .baseUrl(houseip)   //요청 보내는 API 서버 url /로 끝나야 함
+            .baseUrl(localhost)   //요청 보내는 API 서버 url /로 끝나야 함
             .addConverterFactory(ScalarsConverterFactory.create() )
             .addConverterFactory(GsonConverterFactory.create())//Gson을 역직렬화
             .build()
