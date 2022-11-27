@@ -9,7 +9,11 @@
     <string name="mobile_message">Mobile message</string>
     <string name="phone_message">Phone Message</string>
     <string name="message">Message Content</string>
-    <string name="message_log">Message log</string>
+    <string name="message_log">I MISS YOU</string>
     <string name="init">...</string>
     <string name="send_message_to_phone">Send Message to Phone</string>
+
+    <string name="measure_status">Status: %1$s</string>
+    <string name="last_measured">Last measured:</string>
+    <string name="heart_rate_not_available">Heart rate not available on this device</string>
 </resources>

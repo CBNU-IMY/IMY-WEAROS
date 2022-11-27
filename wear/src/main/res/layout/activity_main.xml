@@ -40,6 +40,19 @@
                         android:textSize="11sp"
                         android:textStyle="bold"
                         tools:ignore="SmallSp" />
+
+                    <!-- Shown at startup. -->
+                    <ProgressBar
+                        android:id="@+id/progress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </LinearLayout>
 
 
@@ -50,24 +63,47 @@
                     android:orientation="vertical"
                     android:paddingTop="5dp">
 
-                    <ScrollView
-                        android:id="@+id/scrollviewTextMessageLog"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="54dp"
-                        android:paddingBottom="4dp"
-                        android:scrollbars="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <!-- Views to show when heart rate is available on the device. -->
+                        <TextView
+                            android:id="@+id/status_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintVertical_chainStyle="packed"
+                            tools:text="상태: 착용중"
+                            android:textColor="@color/white"
+                            tools:visibility="visible" />
 
                         <TextView
-                            android:id="@+id/messagelogTextView"
-                            android:layout_width="match_parent"
+                            android:id="@+id/last_measured_label"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="9dp"
-                            android:paddingEnd="9dp"
-                            android:scrollbars="vertical"
-                            android:text="@string/init"
-                            android:textColor="?TextViewHeaderColor"
-                            android:textSize="12sp" />
-                    </ScrollView>
+                            android:text="최근 상태"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/status_text"
+                            android:textColor="@color/white"
+                            tools:visibility="visible" />
+
+
+                    </LinearLayout>
+
+
+
 
                 </LinearLayout>
 
@@ -76,7 +112,36 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="1dp"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/heart"
+                        android:layout_width="@dimen/icon_size"
+                        android:layout_height="@dimen/icon_size"
+                        android:contentDescription="@null"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/last_measured_value"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/last_measured_value"
+                        app:layout_constraintTop_toTopOf="@id/last_measured_value"
+                        app:srcCompat="@drawable/ic_heart"
+                        tools:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/last_measured_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textSize="40sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/heart"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/last_measured_label"
+                        tools:text="60.0"
+                        android:textColor="@color/white"
+                        tools:visibility="visible" />
 
                     <TextView
                         android:id="@+id/deviceconnectionStatusTv"
@@ -91,64 +156,6 @@
                         tools:ignore="SmallSp" />
 
                 </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="1dp"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/textInputLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/message"
-                        android:textColorHint="?TextViewHeaderColor"
-                        android:visibility="invisible">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/messagecontentEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:maxLines="1"
-                            android:textColor="?TextInfoColor"
-                            android:textSize="11sp"
-                            tools:ignore="SmallSp" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="1dp"
-                    android:layout_marginBottom="25dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/sendmessageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="?attr/selectableItemBackground"
-                        android:gravity="center"
-                        android:maxLines="2"
-                        android:scrollbars="vertical"
-                        android:text="@string/send_message_to_phone"
-                        android:textColor="?TextInfoColor"
-                        android:textSize="10.5sp"
-                        android:textStyle="bold"
-                        android:visibility="visible"
-                        tools:ignore="SmallSp" />
-
-                </LinearLayout>
-
 
             </LinearLayout>
 

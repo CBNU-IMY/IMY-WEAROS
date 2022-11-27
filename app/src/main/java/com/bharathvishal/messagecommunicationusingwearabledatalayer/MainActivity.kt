@@ -58,53 +58,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                 initialiseDevicePairing(tempAct)
             }
         }
-
-
-
-        binding.sendmessageButton.setOnClickListener {
-            if (wearableDeviceConnected) {
-                if (binding.messagecontentEditText.text!!.isNotEmpty()) {
-
-                    val nodeId: String = messageEvent?.sourceNodeId!!
-                    // Set the data of the message to be the bytes of the Uri.
-                    val payload: ByteArray =
-                        binding.messagecontentEditText.text.toString().toByteArray()
-
-                    // Send the rpc
-                    // Instantiates clients without member variables, as clients are inexpensive to
-                    // create. (They are cached and shared between GoogleApi instances.)
-                    val sendMessageTask =
-                        Wearable.getMessageClient(activityContext!!)
-                            .sendMessage(nodeId, MESSAGE_ITEM_RECEIVED_PATH, payload)
-
-                    sendMessageTask.addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            Log.d("send1", "Message sent successfully")
-                            val sbTemp = StringBuilder()
-                            sbTemp.append("\n")
-                            sbTemp.append(binding.messagecontentEditText.text.toString())
-                            sbTemp.append(" (Sent to Wearable)")
-
-                            Log.d("receive1", " $sbTemp")
-                            binding.messagelogTextView.append(sbTemp)
-
-                            binding.scrollviewText.requestFocus()
-                            binding.scrollviewText.post {
-                                binding.scrollviewText.scrollTo(0, binding.scrollviewText.bottom)
-                            }
-                        } else {
-                            Log.d("send1", "Message failed.")
-                        }
-                    }
-                } else {
-                    Toast.makeText(
-                        activityContext,
-                        "Message content is empty. Please enter some message and proceed",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
     }
 
 
@@ -135,7 +88,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                             "Wearable device paired and app is open."
                         binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                         wearableDeviceConnected = true
-                        binding.sendmessageButton.visibility = View.VISIBLE
                     } else {
                         Toast.makeText(
                             activityContext,
@@ -146,7 +98,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                             "Wearable device paired but app isn't open."
                         binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                         wearableDeviceConnected = false
-                        binding.sendmessageButton.visibility = View.GONE
                     }
                 } else {
                     Toast.makeText(
@@ -158,7 +109,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                         "Wearable device not paired and connected."
                     binding.deviceconnectionStatusTv.visibility = View.VISIBLE
                     wearableDeviceConnected = false
-                    binding.sendmessageButton.visibility = View.GONE
                 }
             }
         }
@@ -294,7 +244,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
                 sbTemp.append("\nWearable device connected.")
                 Log.d("receive1", " $sbTemp")
                 binding.messagelogTextView.text = sbTemp
-                binding.textInputLayout.visibility = View.VISIBLE
 
                 binding.checkwearablesButton.visibility = View.GONE
                 messageEvent = p0
@@ -303,8 +252,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(),
 
                 try {
                     binding.messagelogTextView.visibility = View.VISIBLE
-                    binding.textInputLayout.visibility = View.VISIBLE
-                    binding.sendmessageButton.visibility = View.VISIBLE
 
                     val sbTemp = StringBuilder()
 
